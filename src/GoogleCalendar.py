@@ -1,5 +1,4 @@
 import os
-import json
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -8,14 +7,29 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 from dotenv import load_dotenv
+import pickle
 
 class GoogleCalendar:
     def __init__(self):
         load_dotenv()
         self.SCOPES = ['https://www.googleapis.com/auth/calendar']
         self.calendar_id = os.getenv('GOOGLE_CAL_ID')
-        flow = InstalledAppFlow.from_client_secrets_file('./credentials.json', self.SCOPES)
-        self.credentials = flow.run_local_server(port=0)
+        
+        self.credentials = None
+    
+    def load_credentials(self):
+        if os.path.exists('./token.pickle'):
+            with open('token.pickle', 'rb') as token:
+                self.credentials = pickle.load(token)
+        if not self.credentials or not self.credentials.valid:
+            if self.credentials and self.credentials.expired and self.credentials.refresh_token:
+                self.credentials.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file('./credentials.json', self.SCOPES)
+                self.credentials = flow.run_local_server(port=0)
+            with open('./token.pickle', 'wb') as token:
+                pickle.dump(self.credentials, token)
+
 
     def create_event(self, question):
         event = {

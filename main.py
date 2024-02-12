@@ -8,6 +8,7 @@ def main():
     question = json.loads(question)
 
     event = GoogleCalendar()
+    event.load_credentials()
     event.create_event(question)
 
 if __name__ == "__main__":
