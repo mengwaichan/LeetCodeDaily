@@ -3,6 +3,7 @@ env/
 __pycache__/
 credentials.json
 token.pickle
+firebase_auth.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

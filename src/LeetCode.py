@@ -47,7 +47,7 @@ class LeetCode:
 
         question_json = {
         "date": response.json()['data']['activeDailyCodingChallengeQuestion']['date'],
-        "link": response.json()['data']['activeDailyCodingChallengeQuestion']['link'],
+        "link": 'https://leetcode.com'+ response.json()['data']['activeDailyCodingChallengeQuestion']['link'],
         "title": question['title'],
         "difficulty": question['difficulty'],
         "topicTags": [tag['name'] for tag in question['topicTags']],

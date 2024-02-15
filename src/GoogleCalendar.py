@@ -32,7 +32,7 @@ class GoogleCalendar:
     def create_event(self, question):
         event = {
             'summary': question['title'],
-            'location': 'https://leetcode.com'+ question["link"],
+            'location': question["link"],
             'description': f'Difficulty: {question["difficulty"]}',
             'start': {
                 'date':question["date"],

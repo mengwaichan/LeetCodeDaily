@@ -13,7 +13,7 @@ class Discord():
         data["embeds"] = [
             {
                 "description" : f'Difficulty: {question["difficulty"]}',
-                "url" : 'https://leetcode.com'+ question["link"],
+                "url" : question["link"],
                 "title": question['title']
             }
         ]
