@@ -1,15 +1,10 @@
 import requests
-import json
-import os
-from dotenv import load_dotenv
 
 class Discord():
-    def __init__(self) -> None:
-        load_dotenv()
-        self.webhook_url = os.getenv("DISCORD_URL")
+    def __init__(self, url) -> None:
+        self.webhook_url = url
     
     def send_message(self, question):
-        
         data = {
             "content" : "@everyone",
             "username": "Leetcode"
@@ -29,4 +24,4 @@ class Discord():
         except requests.exceptions.HTTPError as err:
             print(err)
         else:
-            print("Payload delivered successfully, code {}.".format(response.status_code))
+            print("Message delivered to Discord successfully, code {}.".format(response.status_code))

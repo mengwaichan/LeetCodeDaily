@@ -6,14 +6,12 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-from dotenv import load_dotenv
 import pickle
 
 class GoogleCalendar:
-    def __init__(self):
-        load_dotenv()
+    def __init__(self, calendar_id):
         self.SCOPES = ['https://www.googleapis.com/auth/calendar']
-        self.calendar_id = os.getenv('GOOGLE_CAL_ID')
+        self.calendar_id = calendar_id
         
         self.credentials = None
     
