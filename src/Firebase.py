@@ -15,8 +15,10 @@ class Firebase:
         month = date.strftime("%B")
         year = date.strftime("%Y")
 
-        question_ref = firestore.client().collection(year).document(month)
-        question_ref.set(question)
+        db_ref = firestore.client().collection(year).document(month)
+        
+        question_ref = db_ref.collection(question['date'])
+        question_ref.add(question)
 
         print("New question inserted to database")
     

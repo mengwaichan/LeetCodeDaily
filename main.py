@@ -6,10 +6,14 @@ from src.Firebase import Firebase
 from dotenv import load_dotenv
 import os
 import json
+from flask import Flask
 
 load_dotenv()
+app = Flask(__name__)
 
-def main():
+
+@app.route('/')
+def create():
     question = LeetCode().fetch_question()
     question = json.loads(question)
 
@@ -25,5 +29,6 @@ def main():
     db.insert_question(question)
 
 if __name__ == "__main__":
-    main()
+    app.run(host='0.0.0.0', port=8080)
+
 
