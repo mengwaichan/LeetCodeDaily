@@ -1,7 +1,7 @@
-from src.GoogleCalendar import GoogleCalendar
-from src.LeetCode import LeetCode
-from src.DiscordWebHook import Discord
-from src.Firebase import Firebase
+from src.google_calendar import GoogleCalendar
+from src.leetcode import LeetCode
+from src.discord_webhook import Discord
+from src.firebase import Firebase
 
 from dotenv import load_dotenv
 import os
@@ -10,7 +10,6 @@ from flask import Flask
 
 load_dotenv()
 app = Flask(__name__)
-
 
 @app.route('/')
 def create():
