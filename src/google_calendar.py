@@ -28,7 +28,6 @@ class GoogleCalendar:
             with open('./token.pickle', 'wb') as token:
                 pickle.dump(self.credentials, token)
 
-
     def create_event(self, question):
         event = {
             'summary': question['title'],
@@ -44,6 +43,11 @@ class GoogleCalendar:
                 },
         }
 
-        service = build('calendar', 'v3', credentials=self.credentials)
-        event = service.events().insert(calendarId=self.calendar_id, body=event).execute()
-        print('Event created: %s' % (event.get('htmlLink')))
+        try:
+            service = build('calendar', 'v3', credentials=self.credentials)
+            event = service.events().insert(calendarId=self.calendar_id, body=event).execute()
+            print('Event created: %s' % (event.get('htmlLink')))
+        except HttpError as e:
+            print(f'An HTTP error occurred: {e}')
+        except Exception as e:
+            print(f'An error occurred: {e}')
